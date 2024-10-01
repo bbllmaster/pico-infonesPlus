@@ -33,7 +33,7 @@
 #include "menu.h"
 #include "nespad.h"
 #include "wiipad.h"
-
+#include "zapper.h"
 #include "settings.h"
 
 // #ifdef __cplusplus
@@ -375,7 +375,12 @@ void InfoNES_PadState(DWORD *pdwPad1, DWORD *pdwPad2, DWORD *pdwSystem)
             }
         }
 #endif
-
+        // read zpper input, only controlller 2
+        if ( i == 1 )
+        {
+            // Zapper
+            v |= readzapper();
+        }
         int rv = v;
         if (rapidFireCounter & 2)
         {
@@ -436,7 +441,7 @@ void InfoNES_PadState(DWORD *pdwPad1, DWORD *pdwPad2, DWORD *pdwSystem)
 
         prevButtons[i] = v;
     }
-
+ 
     *pdwSystem = reset ? PAD_SYS_QUIT : 0;
 }
 
@@ -1025,7 +1030,7 @@ int main()
 #if WII_PIN_SDA >= 0 and WII_PIN_SCL >= 0
     wiipad_begin();
 #endif
-
+    initzapper();
     // 空サンプル詰めとく
     dvi_->getAudioRingBuffer().advanceWritePointer(255);
 

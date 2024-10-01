@@ -185,6 +185,7 @@ add_executable(${projectname}
     RomLister.cpp
     FrensHelpers.cpp
     settings.cpp
+    zapper.cpp
 )
 
 pico_set_program_name(${projectname} "${projectname}")
