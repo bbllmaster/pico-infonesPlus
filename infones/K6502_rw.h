@@ -156,10 +156,12 @@ static inline BYTE __not_in_flash_func(K6502_Read)(WORD wAddr)
     }
     else if (wAddr == 0x4017)
     {
+      // Read zapper data instead of joypad2
       // Set Joypad2 data
-      byRet = (BYTE)((PAD2_Latch >> PAD2_Bit) & 1) | 0x40;
-      PAD2_Bit = (PAD2_Bit == 23) ? 0 : (PAD2_Bit + 1);
-      return byRet;
+      // byRet = (BYTE)((PAD2_Latch >> PAD2_Bit) & 1) | 0x40;
+      // PAD2_Bit = (PAD2_Bit == 23) ? 0 : (PAD2_Bit + 1);
+      // return byRet;
+      return (BYTE)PAD2_Latch;
     }
     else
     {
