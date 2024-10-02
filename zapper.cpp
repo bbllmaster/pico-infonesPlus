@@ -3,17 +3,17 @@
 #include <stdio.h>
 
 #ifndef ZAPPER_D3
-#define ZAPPER_D3 28
+#define ZAPPER_D3 28      // light detection
 #endif
 
 #ifndef ZAPPER_D4
-#define ZAPPER_D4 27
+#define ZAPPER_D4 27      // trigger
 #endif
 
-bool zapperpulled = false;
+bool zapperactive = false;
 
 #define ZAPPER_TRIGGER 0b10000
-#define ZAPPER_LIGHTGUN 0b01000
+#define ZAPPER_LIGHTDETECT 0b01000
 void initzapper(){
     // Initialize the zapper
     gpio_init(ZAPPER_D3);
@@ -25,13 +25,15 @@ void initzapper(){
     gpio_pull_up(ZAPPER_D4);
     
 }
-
+// https://www.nesdev.org/zapper_to_famicom.txt
+// https://wiki.nesdev.com/w/index.php/Zapper
+// D4 is the trigger, D3 is the light detection
 int readzapper(){
     // Read the zapper
-    zapperpulled = false;
-    int zapper = (gpio_get(ZAPPER_D3) == 0) ? ZAPPER_TRIGGER : 0; 
-    int lightgun = (gpio_get(ZAPPER_D4) == 0) ? ZAPPER_LIGHTGUN : 0;
+    zapperactive = false;
+    int zapper = (gpio_get(ZAPPER_D4) == 0) ? ZAPPER_TRIGGER : 0; 
+    int lightgun = (gpio_get(ZAPPER_D3) == 0) ? ZAPPER_LIGHTDETECT : 0;
     //if (zapper || lightgun) printf("Zapper: %d, Lightgun: %d\n", zapper, lightgun);
-    zapperpulled = (zapper || lightgun) ;
+    zapperactive = (zapper || lightgun) ;
     return zapper | lightgun;
 }

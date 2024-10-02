@@ -158,7 +158,7 @@ static inline BYTE __not_in_flash_func(K6502_Read)(WORD wAddr)
     {
       
       
-      if (zapperpulled)
+      if (zapperactive)
       {
         // Read zapper data instead of joypad2
         return (BYTE)PAD2_Latch;

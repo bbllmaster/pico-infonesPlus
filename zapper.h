@@ -1,5 +1,5 @@
 #pragma once
 
-extern bool  zapperpulled;
+extern bool  zapperactive;
 void  initzapper();
 int readzapper();
