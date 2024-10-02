@@ -2,6 +2,18 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 
+// Pico DVI pins (breadboard and PCB)
+// D3 28
+// D4 27
+// WaveShare RP2040 DVI
+// D3 14
+// D4 15
+// Adafruit Feather RP2040 DVI
+// D3 11
+// D4 12
+// Pimoroni Pico DV Demo
+// D3 ??
+// D4 ??
 #ifndef ZAPPER_D3
 #define ZAPPER_D3 28      // light detection
 #endif
