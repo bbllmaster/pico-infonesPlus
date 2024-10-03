@@ -43,9 +43,9 @@ void initzapper(){
 int readzapper(){
     // Read the zapper
     zapperactive = false;
-    int zapper = (gpio_get(ZAPPER_D4) == 0) ? ZAPPER_TRIGGER : 0; 
+    int zapper = (gpio_get(ZAPPER_D4) == 0) ? 0 : ZAPPER_TRIGGER; 
     int lightgun = (gpio_get(ZAPPER_D3) == 0) ? ZAPPER_LIGHTDETECT : 0;
-    //if (zapper || lightgun) printf("Zapper: %d, Lightgun: %d\n", zapper, lightgun);
+    //if (lightgun || zapper) printf("Lightgun: %d %d\n", zapper, lightgun);
     zapperactive = (zapper || lightgun) ;
     return zapper | lightgun;
 }
