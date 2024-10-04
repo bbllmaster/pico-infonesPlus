@@ -156,9 +156,7 @@ static inline BYTE __not_in_flash_func(K6502_Read)(WORD wAddr)
     }
     else if (wAddr == 0x4017)
     {
-      
-      
-      if (zapperactive)
+      if (zapperconnected)
       {
         // Read zapper data instead of joypad2
         return (BYTE)PAD2_Latch;
