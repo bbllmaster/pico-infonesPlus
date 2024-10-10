@@ -17,7 +17,10 @@ See below for [possible configurations](#possible-configurations), [supported ga
 
 [See also the Adafruit guide](https://learn.adafruit.com/nes-emulator-for-rp2040-dvi-boards), although it is outdated now. 
 
-There is also an emulator port for the Sega Master System/Sega Game Gear. You can find it here [https://github.com/fhoedemakers/pico-smsplus](https://github.com/fhoedemakers/pico-smsplus)
+There is also an emulator port for the Sega Master System/Sega Game Gear and DMG Game Boy. You can find them here:
+
+- Sega Master System/Game Gear: [https://github.com/fhoedemakers/pico-smsplus](https://github.com/fhoedemakers/pico-smsplus)
+- DMG Game Boy: [https://github.com/fhoedemakers/pico-peanutGB](https://github.com/fhoedemakers/pico-peanutGB)
 
 ***
 
@@ -397,13 +400,6 @@ When using legacy controllers, this is needed:
       *  [Adafruit STEMMA QT / Qwiic JST SH 4-pin Cable](https://www.adafruit.com/product/4210)
       *  [WII Classic wired controller](https://www.amazon.com/Classic-Controller-Nintendo-Wii-Remote-Console/dp/B0BYNHWS1V/ref=sr_1_1_sspa?crid=1I66OX5L05507&keywords=Wired+WII+Classic+controller&qid=1688119981&sprefix=wired+wii+classic+controller%2Caps%2C150&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1)
   
-
-### flashing the Feather RP2040
-- Download **piconesPlusFeatherDVI.uf2** from the [releases page](https://github.com/fhoedemakers/pico-infonesPlus/releases/latest).
-- Connect the feather to a USB port on your computer using the USB-C data cable.
-- On the feather, push and hold the BOOTSEL button, then press RESET. Release the buttons, the drive RPI-RP2 should appear on your computer.
-- Drag and drop the UF2 file on to the RPI-RP2 drive. The Raspberry Pi Pico will reboot and will now run the emulator.
-
 ### Pinout 
 See: https://learn.adafruit.com/assets/119662 for the Feather pin scheme.
 
@@ -422,8 +418,12 @@ Use the breadboard to connect all together:
 | CLK (SCK)     | GPIO14    |               |
 | DI (MOSI)     | GPIO15   |               |
 | DO (MISO)     | GPIO8   |               |
-| 3V            |        | + column on breadboard connected to feather 3.3V pin         |
+| 5V            | USB     | pin labelled USB on feather       |
+| 3V            |        | See Note below
 | GND           |        | - column on breadboard connected to feather ground pin|
+
+> [!NOTE]
+> The Adafruit Micro-SD breakout board+ has also a 3V input pin which can be connected to + column on breadboard connected to feather 3.3V pin. However, this gave me frequently errors trying to mount the SD card. So use 5V in stead.
 
 #### WII  nunchuck breakout adapter.
 
@@ -440,6 +440,15 @@ Connect the nunchuck breakout adapter to the Feather DVI using the STEMMA QT cab
 | NES Data      | GPIO6 | GPIO28 |        |
 
 ![Image](assets/nes-controller-pinout.png)
+
+### flashing the Feather RP2040
+- Download **piconesPlusFeatherDVI.uf2** from the [releases page](https://github.com/fhoedemakers/pico-infonesPlus/releases/latest).
+- Connect the feather to a USB port on your computer using the USB-C data cable.
+- On the feather, push and hold the BOOTSEL button, then press RESET. Release the buttons, the drive RPI-RP2 should appear on your computer.
+- Drag and drop the UF2 file on to the RPI-RP2 drive. The Raspberry Pi Pico will reboot and will now run the emulator.
+
+> [!NOTE]
+>  When the emulator won't start after flashing or powering on, and the screen shows 'No signal,' press the reset button once again. The emulator should now boot.
 
 ### setting up the hardware
 
@@ -545,7 +554,7 @@ Connections are as follows:
 
 
 > [!NOTE]
->  When the emulator won't start and the screen shows "No signal", press the run button once again. The emulator will now boot.
+>  When the emulator won't start after flashing or powering on, and the screen shows 'No signal,' press the run button once again. The emulator should now boot.
 
 ### Image: one or two player setup with usb controller and NES controller port
 
@@ -597,7 +606,7 @@ Designed by [@johnedgarpark](https://twitter.com/johnedgarpark)
 
 Several Companies  can make these PCBs for you. 
 
-I personally recommend [PCBWay](https://www.pcbway.com/). The boards i ordered from them are of excellent quality.
+I personally recommend [PCBWay](https://www.pcbway.com/). The boards i ordered from them are of excellent quality. They have also a very short lead time. Boards i ordered on Monday arrived from China to my home in the Netherlands on Friday of the same week.
 
 [![Image](assets/pcbw.png)](https://www.pcbway.com/)
 
@@ -638,13 +647,20 @@ Choose either of the following:
 
 ### 3D printed case for PCB
 
-Gavin Knight ([DynaMight1124](https://github.com/DynaMight1124)) designed a NES-like case you can 3d-print as an enclosure for this pcb.  You can find it here: [https://www.thingiverse.com/thing:6689537](https://www.thingiverse.com/thing:6689537). Here you can find two designs: the latest design for PCB v2.0  and the previous design for [PCB v0.2](PCB/v0.2). Make sure to print the correct files for the PCB version you own. You can find more information on Gavin's Thingiverse page.
+Gavin Knight ([DynaMight1124](https://github.com/DynaMight1124)) designed a NES-like case you can 3d-print as an enclosure for this pcb.  You can find it here: [https://www.thingiverse.com/thing:6689537](https://www.thingiverse.com/thing:6689537). Here you can find two designs: the latest design for PCB v2.0  and the previous design for [PCB v0.2](PCB/v0.2). In the latest v2.0 design, you can choose between two top covers, one with a button connecting to the bootsel button for easy firmware upgrades, the other without the button. In this case you have to remove the top cover to access the bootsel button. See images below. Make sure to print the correct files for the PCB version you own. You can find more information on Gavin's Thingiverse page.
 
-![3d2playerTOP](https://github.com/user-attachments/assets/c6205db3-580e-41e9-83e4-66c9534c6519)
+#### Top Cover v2.0 without button (Top_v2.0.stl)
+![Top cover without button](https://github.com/user-attachments/assets/c6205db3-580e-41e9-83e4-66c9534c6519)
 
+#### Top Cover v2.0 with bootsel button (Top_v2.0_with_Bootsel_Button.stl)
+![Top Cover with button to access bootsel](https://github.com/user-attachments/assets/3c8f8990-51b9-4873-9054-64bb2cd6c300)
 
+#### Base v2.0 (Base_v2.0.stl) 
 ![3d2playerBottom](https://github.com/user-attachments/assets/256bbd1b-b6db-485d-a59c-fd22fd017887)
 
+#### on/off button (Power_Switch.stl)
+
+![powerswitch](https://github.com/user-attachments/assets/edba3bdd-7061-4370-880d-d4cfd7def0e2)
 
 
 ***
