@@ -74,7 +74,7 @@ jobs:
                mkdir build && \
                cd build && \
                cmake .. && \
-               make
+               make install
 
           - name: Build all the .uf2 files
             run: |            
