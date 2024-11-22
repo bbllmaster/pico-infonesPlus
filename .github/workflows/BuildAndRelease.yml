@@ -74,13 +74,15 @@ jobs:
                mkdir build && \
                cd build && \
                cmake .. && \
-               make 
+               make  
+               ls /home/runner/picotool/build
+               ls /home/runner/picotool/
 
           - name: Build all the .uf2 files
             run: |            
                  chmod +x build*.sh bld.sh || exit 1
                  export PICO_SDK_PATH=$HOME/pico-sdk
-                 export PICOTOOL=$HOME/picotool/build/picotool
+                 PICOTOOL=$HOME/picotool/build/picotool
                  export PATH=$HOME/picotool/build:$PATH 
                  ./buildAll.sh
 
