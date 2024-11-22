@@ -87,8 +87,8 @@ namespace
     };
     // Waveshare RP2040-PiZero DVI
     constexpr dvi::Config dviConfig_WaveShareRp2040 = {
-        .pinTMDS = {26, 24, 22},
-        .pinClock = 28,
+        .pinTMDS = {2, 4, 6},
+        .pinClock = 0,
         .invert = false,
     };
     std::unique_ptr<dvi::DVI> dvi_;
