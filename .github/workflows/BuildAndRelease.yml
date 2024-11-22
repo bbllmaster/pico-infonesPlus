@@ -81,6 +81,7 @@ jobs:
                  chmod +x build*.sh bld.sh || exit 1
                  export PICO_SDK_PATH=$HOME/pico2/pico-sdk
                  export PICOTOOL=$HOME/picotool/build/picotool
+                 export PATH=$HOME/picotool/build:$PATH 
                  ./buildAll.sh
 
           - name: Show release info using picotool
