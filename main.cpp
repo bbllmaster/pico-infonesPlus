@@ -81,8 +81,8 @@ namespace
     };
     // Adafruit Feather RP2040 DVI
     constexpr dvi::Config dviConfig_AdafruitFeatherDVI = {
-        .pinTMDS = {18, 20, 22},
-        .pinClock = 16,
+        .pinTMDS = {2, 4, 6},
+        .pinClock = 0,
         .invert = true,
     };
     // Waveshare RP2040-PiZero DVI
