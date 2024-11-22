@@ -28,11 +28,12 @@ jobs:
         name: Build and create release
         steps:
           
-          # - name: Install dependencies
-          #   run: |
-          #        sudo apt update && \
-          #        sudo apt install -y git python3 && \
-          #        sudo apt install -y cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential libusb-1.0-0-dev
+          - name: Install dependencies
+            run: |
+               sudo apt update && \
+               sudo apt install -y git python3 && \
+               sudo apt install -y cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential libusb-1.0-0-dev
+               
                  
           - name: Check out this repository with submodules
             uses: actions/checkout@v4
@@ -56,24 +57,24 @@ jobs:
                  fi
                  grep "pico_set_program_version" CMakeLists.txt
                  grep SWVERSION menu.h
+                 
+          - name: Install Pico SDk
+            run: |
+               cd $HOME && \
+               git clone https://github.com/raspberrypi/pico-sdk.git --branch master && \
+               cd pico-sdk/ && \
+               git submodule update --init
 
-          # - name: Install Pico SDk
-          #   run: |
-          #        cd $HOME && \
-          #        git clone https://github.com/raspberrypi/pico-sdk.git --branch master && \
-          #        cd pico-sdk/ && \
-          #        git submodule update --init
-
-          # - name: Install picotool
-          #   run: |
-          #        cd $HOME && \
-          #        export PICO_SDK_PATH=$HOME/pico-sdk && \
-          #        git clone https://github.com/raspberrypi/picotool.git --branch master && \
-          #        cd picotool/ && \
-          #        mkdir build && \
-          #        cd build && \
-          #        cmake .. && \
-          #        make
+          - name: Install picotool
+            run: |
+               cd $HOME && \
+               export PICO_SDK_PATH=$HOME/pico-sdk && \
+               git clone https://github.com/raspberrypi/picotool.git --branch master && \
+               cd picotool/ && \
+               mkdir build && \
+               cd build && \
+               cmake .. && \
+               make
 
           - name: Build all the .uf2 files
             run: |            
@@ -81,14 +82,14 @@ jobs:
                  export PICO_SDK_PATH=$HOME/pico2/pico-sdk
                  ./buildAll.sh
 
-          # - name: Show release info using picotool
-          #  run: |
-          #       PICOTOOL=$HOME/picotool/build/picotool
-          #       export PICO_SDK_PATH=$HOME/pico-sdk
-          #       for file in releases/*.uf2; do
-          #           echo "-----------------------------"
-          #           $PICOTOOL info $file
-          #       done
+          - name: Show release info using picotool
+            run: |
+                  PICOTOOL=$HOME/picotool/build/picotool
+                  export PICO_SDK_PATH=$HOME/pico-sdk
+                  for file in releases/*.uf2; do
+                      echo "-----------------------------"
+                      $PICOTOOL info $file
+                  done
 
           - name: Create release
             uses: softprops/action-gh-release@v2
