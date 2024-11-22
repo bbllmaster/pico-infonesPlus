@@ -77,6 +77,7 @@ jobs:
                make  
                ls /home/runner/picotool/build
                cp /home/runner/picotool/build/picotool /bin/
+               chmod +x /bin/picotool
 
           - name: Build all the .uf2 files
             run: |            
