@@ -74,9 +74,10 @@ jobs:
                mkdir build && \
                cd build && \
                cmake .. && \
-               make  
+               make  -j4
                ls  /home/runner/picotool/build/
-               cp $HOME/picotool/build/picotool /usr/local/bin/
+               sudo cp $HOME/picotool/build/picotool /usr/local/bin/
+               #echo 'export PATH=$HOME/picotool/build/:$PATH' >> ~/.bashrc
 
           - name: Build all the .uf2 files
             run: |            
