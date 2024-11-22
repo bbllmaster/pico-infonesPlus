@@ -76,13 +76,14 @@ jobs:
                cmake .. && \
                make  
                ls  /home/runner/picotool/build/
+               cp $HOME/picotool/build/picotool /usr/local/bin/
 
           - name: Build all the .uf2 files
             run: |            
                  chmod +x build*.sh bld.sh || exit 1
                  export PICO_SDK_PATH=$HOME/pico-sdk
                  PICOTOOL=$HOME/picotool/build/picotool 
-                 export PATH=$HOME/picotool/build/:$PATH 
+                 #export PATH=$HOME/picotool/build/:$PATH 
                  ./buildAll.sh
 
           - name: Show release info using picotool
