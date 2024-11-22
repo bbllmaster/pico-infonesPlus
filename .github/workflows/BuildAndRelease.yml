@@ -24,7 +24,7 @@ permissions:
 # Build binary and send to releases
 jobs:
     build-release:
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         name: Build and create release
         steps:
           
