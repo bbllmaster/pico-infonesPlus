@@ -9,7 +9,7 @@ on:
           - "v*.*-alpha"
           - "v*.*.*"
           - "v*.*"
-        branches: [ main ]
+        #branches: [ main ]
     # pull_request:
     #     branches: [ main ] 
 
